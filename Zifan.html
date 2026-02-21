@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>认识一周 · 小记</title>
+  <style>
+    /* ===== 兔子光标 ===== */
+    {
+      cursor: url("cursor.cur"), auto;
+    }
+
+    body {
+      background: linear-gradient(145deg, #fff9f0 0%, #ffe8d9 100%);
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+    .card {
+      max-width: 400px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border-radius: 32px;
+      padding: 30px 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      text-align: center;
+      border: 1px solid rgba(255,215,175,0.5);
+      position: relative;
+      z-index: 10;
+      pointer-events: auto;
+    }
+
+    /* 大emoji样式 */
+    .big-emoji {
+      font-size: 60px;
+      line-height: 1;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));
+    }
+
+    .days {
+      font-size: 80px;
+      font-weight: 600;
+      color: #c45a32;
+      line-height: 1;
+      margin: 10px 0 5px;
+    }
+    .label {
+      font-size: 18px;
+      color: #b97a5a;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+    }
+    .moment {
+      background: white;
+      border-radius: 100px;
+      padding: 14px 20px;
+      margin: 12px 0;
+      color: #5e3a2c;
+      font-size: 16px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+      border: 1px solid #ffe1cf;
+    }
+    .footer {
+      margin-top: 30px;
+      color: #b97a5a;
+      font-size: 14px;
+      border-top: 1px dashed #ffd9bf;
+      padding-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .firework {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ff8a00, #ff3d00);
+      pointer-events: none;
+      animation: explode 0.8s ease-out forwards;
+    }
+
+    @keyframes explode {
+      0% {
+        transform: translate(0,0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--x), var(--y)) scale(0);
+        opacity: 0;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="card">
+    <!-- 第一版的大emoji回来了 -->
+    <div class="big-emoji">🎉</div>
+
+    <div class="days">7</div>
+    <div class="label">认识一周啦</div>
+
+    <div class="moment"> 🎁 上次抓到的玩偶，希望你能喜欢</div>
+    <div class="moment"> ☕ 工作虽忙，也要注意休息哦</div>
+    <div class="moment"> ✨ 一周了，想把这个小页面送给你</div>
+
+    <div class="footer">
+      <span>梓凡 · 认识你很高兴</span>
+    </div>
+  </div>
+
+  <script>
+document.addEventListener('click', function(e) {
+  const x = e.clientX;
+  const y = e.clientY;
+
+  for (let i = 0; i < 20; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'firework';
+    document.body.appendChild(particle);
+
+    const angle = Math.random() * 2 * Math.PI;
+    const distance = Math.random() * 120;
+
+    const offsetX = Math.cos(angle) * distance;
+    const offsetY = Math.sin(angle) * distance;
+
+    particle.style.left = x + 'px';
+    particle.style.top = y + 'px';
+    particle.style.setProperty('--x', offsetX + 'px');
+    particle.style.setProperty('--y', offsetY + 'px');
+
+    particle.addEventListener('animationend', () => {
+      particle.remove();
+    });
+  }
+});
+  </script>
+</body>
+</html>

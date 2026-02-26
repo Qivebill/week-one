@@ -146,5 +146,34 @@ document.addEventListener('click', function(e) {
   }
 });
   </script>
+
+<!-- 背景音乐（隐藏） -->
+<audio id="bgMusic" loop preload="auto" style="display: none;">
+  <source src="CityOfStars.mp3" type="audio/mpeg">
+  <source src="music.ogg" type="audio/ogg">
+  您的浏览器不支持音频播放。
+</audio>
+
+<script>
+  (function() {
+    const audio = document.getElementById('bgMusic');
+
+    // 尝试自动播放（大部分浏览器会阻止）
+    audio.play().catch(() => {
+      console.log('自动播放被阻止，等待用户点击');
+
+      // 监听第一次点击页面时播放
+      const playOnce = () => {
+        audio.play();
+        document.removeEventListener('click', playOnce);
+        document.removeEventListener('touchstart', playOnce);
+      };
+
+      document.addEventListener('click', playOnce);
+      document.addEventListener('touchstart', playOnce);
+    });
+  })();
+</script>
+
 </body>
 </html>
